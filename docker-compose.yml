@@ -1,0 +1,14 @@
+version: '2.3'
+
+services:
+  main:
+    build: .
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+      - /dev/video0:/dev/video0
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=unix:0
+      - NO_AT_BRIDGE=1
+    device_cgroup_rules:
+      - 'c 189:* rmw'
