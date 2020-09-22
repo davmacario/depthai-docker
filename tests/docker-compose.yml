@@ -1,0 +1,14 @@
+version: '2.3'
+
+services:
+  ubuntu2004:
+    build:
+      context: .
+      dockerfile: ubuntu2004.dockerfile
+#  rpi:
+#    build:
+#      context: .
+#      dockerfile: rpi.dockerfile
+#    privileged: true
+#    ports:
+#    - 2222:2222
