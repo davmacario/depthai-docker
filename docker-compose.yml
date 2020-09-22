@@ -1,6 +1,10 @@
 version: '2.3'
 
 services:
+  simple:
+    build:
+      context: .
+      dockerfile: Dockerfile-small
   main:
     build: .
     volumes:

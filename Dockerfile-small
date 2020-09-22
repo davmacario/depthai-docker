@@ -1,0 +1,5 @@
+FROM python:3-buster
+
+RUN apt-get update && apt-get install -y cmake libusb-1.0-0-dev
+RUN python3 -m pip install git+https://github.com/luxonis/depthai-python.git@5a8ebce161fd055d6709bbb06c829e09a0b0ea66
+
