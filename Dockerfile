@@ -14,5 +14,6 @@ RUN apt-get install -y ffmpeg libsm6 libxext6 libgl1-mesa-glx
 RUN python3 -m pip install --upgrade pip
 
 USER openvino
+ENV PYTHONUNBUFFERED 1
 
 CMD source /opt/intel/openvino/bin/setupvars.sh && python3 test_openvino.py
