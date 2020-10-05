@@ -1,3 +1,0 @@
-[submodule "openvino_python_samples"]
-	path = openvino_python_samples
-	url = https://github.com/odundar/openvino_python_samples.git
