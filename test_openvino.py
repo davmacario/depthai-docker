@@ -15,7 +15,9 @@ def prepare_input(nnet, in_dict):
         in_frame = np.array(in_dict[key])
         if len(shape) == 4:
             in_frame = cv2.resize(in_frame, tuple(shape[-2:]))
-            in_frame = in_frame.transpose((2, 0, 1))  # Change data layout from HWC to CHW
+            in_frame = in_frame.transpose(
+                (2, 0, 1)
+            )  # Change data layout from HWC to CHW
         result[key] = in_frame.reshape(shape)
     return result
 
@@ -24,15 +26,13 @@ def run_net(nnet, in_dict):
     nnet.start_async(request_id=0, inputs=prepare_input(nnet, in_dict))
     while nnet.requests[0].wait(-1) != 0:
         time.sleep(0.1)
-    result = {
-        key: nnet.requests[0].outputs[key][0]
-        for key in nnet.requests[0].outputs
-    }
+    result = {key: nnet.requests[0].outputs[key][0] for key in nnet.requests[0].outputs}
     return result
 
 
 cap = cv2.VideoCapture(str(Path("demo.mp4").resolve().absolute()))
 ie = IECore()
+print(ie.available_devices)
 nn_path = Path("models/face-detection-retail-0004")
 definition = str(next(nn_path.glob("*.xml")).resolve().absolute())
 weights = str(next(nn_path.glob("*.bin")).resolve().absolute())
@@ -46,10 +46,14 @@ while cap.isOpened():
     out = run_net(exec_net, {"data": frame})
     height, width = frame.shape[:2]
     coords = [
-        (int(obj[3] * width), int(obj[4] * height), int(obj[5] * width), int(obj[6] * height))
+        (
+            int(obj[3] * width),
+            int(obj[4] * height),
+            int(obj[5] * width),
+            int(obj[6] * height),
+        )
         for obj in out["detection_out"][0]
         if obj[2] > 0.6
     ]
-    head_image = frame[coords[0][1]:coords[0][3], coords[0][0]:coords[0][2]]
+    head_image = frame[coords[0][1] : coords[0][3], coords[0][0] : coords[0][2]]
     print("HEAD_IMAGE_SIZE:", head_image.size)
-

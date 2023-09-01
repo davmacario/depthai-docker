@@ -1,6 +1,7 @@
 FROM openvino/ubuntu18_dev:2020.4
+# FROM openvino/ubuntu20_dev:latest
 
-WORKDIR app/
+WORKDIR /app/
 ADD models/face-detection-retail-0004/ models/face-detection-retail-0004/
 ADD demo.mp4 .
 ADD test_openvino.py .
@@ -12,6 +13,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev
 RUN apt-get install -y ffmpeg libsm6 libxext6 libgl1-mesa-glx
 RUN python3 -m pip install --upgrade pip
+# Added:
+# RUN apt-get install usbutils -y
+# RUN lsusb
 
 USER openvino
 ENV PYTHONUNBUFFERED 1
