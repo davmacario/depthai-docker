@@ -1,5 +1,5 @@
-FROM openvino/ubuntu18_dev:2020.4
-# FROM openvino/ubuntu20_dev:latest
+# FROM openvino/ubuntu18_dev:2020.4
+FROM openvino/ubuntu20_dev:latest
 
 WORKDIR /app/
 ADD models/face-detection-retail-0004/ models/face-detection-retail-0004/
@@ -20,7 +20,7 @@ ENV PYTHONUNBUFFERED 1
 CMD source /opt/intel/openvino/bin/setupvars.sh && python3 test_openvino.py
 
 ### Added:
-RUN apt-get install usbutils libusb-1.0-0-dev -y
+# RUN apt-get install usbutils libusb-1.0-0-dev -y
 # RUN lsusb
 # RUN uname -a
 # RUN lsb_release -a
