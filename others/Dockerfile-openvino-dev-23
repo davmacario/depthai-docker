@@ -295,8 +295,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends cmake make git 
 
 WORKDIR ${INTEL_OPENVINO_DIR}/licensing
 # Please use `third-party-programs-docker-dev.txt` short path to 3d party file if you use the Dockerfile directly from docker_ci/dockerfiles repo folder
-COPY dockerfiles/ubuntu20/third-party-programs-docker-dev.txt ${INTEL_OPENVINO_DIR}/licensing
-COPY dockerfiles/ubuntu20/third-party-programs-docker-runtime.txt ${INTEL_OPENVINO_DIR}/licensing
+COPY ./third-party-programs-docker-dev.txt ${INTEL_OPENVINO_DIR}/licensing
+COPY ./third-party-programs-docker-runtime.txt ${INTEL_OPENVINO_DIR}/licensing
 
 COPY --from=opencv /opt/repo/opencv/build/install ${INTEL_OPENVINO_DIR}/extras/opencv
 RUN  echo "export OpenCV_DIR=${INTEL_OPENVINO_DIR}/extras/opencv/cmake" | tee -a "${INTEL_OPENVINO_DIR}/extras/opencv/setupvars.sh"; \
